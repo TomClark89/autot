@@ -26,10 +26,14 @@ def download_thumbs(url):
 
         for li in search_result_content.find(class_="search-result__attributes").findAll("li"):
             if "miles" in li.text:
-                mileage = li.text.strip()
+                mileage = li.text[:7].strip().replace(',', '')
 
-        price = search_result_content.find(class_="search-result__titles").find(class_="search-result__price").text.strip().ljust(6)
-        car_info = [car_id, price, mileage]# img_page = image_cell.a['href']
+        for li in search_result_content.find(class_="search-result__attributes").findAll("li"):
+            if "reg" in li.text:
+                age = li.text.strip()[:4]
+
+        price = search_result_content.find(class_="search-result__titles").find(class_="search-result__price").text.strip().ljust(6)[1:].replace(',', '')
+        car_info = [car_id, age, price, mileage]# img_page = image_cell.a['href']
         print(car_info)
         with open('cars.csv', 'a', newline='') as myfile:
             wr = csv.writer(myfile, quoting=csv.QUOTE_ALL)
@@ -45,7 +49,14 @@ def download_thumbs(url):
 
 url_front = "http://www.autotrader.co.uk/car-search?sort=distance&radius=1500&postcode=bs84ye&onesearchad=Used&make=MINI&model=HATCH&year-from=2003&maximum-mileage=125000&body-type=Hatchback&fuel-type=Petrol&maximum-badge-engine-size=1.6&transmission=Manual&quantity-of-doors=3&seller-type=private&keywords=cooper&page="
 
-for i in range(1, 41):
+row_headers = ['ID','Age','Miles','Price']
+
+with open('cars.csv', 'w', newline='') as myfile:
+    wr = csv.writer(myfile, quoting=csv.QUOTE_ALL)
+    wr.writerow(row_headers)
+print (row_headers)
+
+for i in range(1, 2):
     url = url_front + str(i)
     #print(url)
     #print ("Page " + str(i))
