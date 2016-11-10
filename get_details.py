@@ -49,7 +49,7 @@ def download_details(url):
 
 url_front = "http://www.autotrader.co.uk/car-search?sort=distance&radius=1500&postcode=bs84ye&onesearchad=Used&make=MINI&model=HATCH&year-from=2003&maximum-mileage=125000&body-type=Hatchback&fuel-type=Petrol&maximum-badge-engine-size=1.6&transmission=Manual&quantity-of-doors=3&seller-type=private&keywords=cooper&page="
 
-row_headers = ['ID','Age','Miles','Price']
+row_headers = ['ID','Age','Price','Miles']
 
 with open('cars.csv', 'w', newline='') as myfile:
     wr = csv.writer(myfile, quoting=csv.QUOTE_ALL)
