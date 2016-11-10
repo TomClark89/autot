@@ -26,7 +26,8 @@ def download_details(url):
 
         for li in search_result_content.find(class_="search-result__attributes").findAll("li"):
             if "miles" in li.text:
-                mileage = li.text[:7].strip().replace(',', '')
+                mileage = li.text.replace(',', '').replace('miles', '').strip()
+
 
         for li in search_result_content.find(class_="search-result__attributes").findAll("li"):
             if "reg" in li.text:
