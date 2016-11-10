@@ -6,7 +6,7 @@ import urllib.request
 
 import csv
 
-def download_thumbs(url):
+def download_details(url):
     result = requests.get(url)
 
     if result.status_code != 200:
@@ -56,8 +56,8 @@ with open('cars.csv', 'w', newline='') as myfile:
     wr.writerow(row_headers)
 print (row_headers)
 
-for i in range(1, 2):
+for i in range(1, 41):
     url = url_front + str(i)
     #print(url)
     #print ("Page " + str(i))
-    download_thumbs(url)
+    download_details(url)
